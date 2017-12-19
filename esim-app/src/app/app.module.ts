@@ -1,14 +1,15 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
+import { FormsModule } from '@angular/forms';///
+
 import { AppComponent } from './app.component';
-import {AppRoutingModule} from './app-routing.module';
+import { routing }  from './app.routing';///
 
 import { HomeModule } from './home/home.module';
 import { UserModule } from './user/user.module';
 import { AuthenticationModule } from './authentication/authentication.module';
 import { AdminModule } from './admin/admin.module';
-import { SharedModule } from './shared/shared.module';
 
 @NgModule({
   declarations: [
@@ -20,8 +21,8 @@ import { SharedModule } from './shared/shared.module';
     UserModule,
     AuthenticationModule,
     AdminModule,
-    AppRoutingModule,
-    SharedModule
+    routing,///
+    FormsModule///
   ],
   providers: [],
   bootstrap: [AppComponent]
