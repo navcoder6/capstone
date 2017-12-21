@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Params } from '@angular/router';
 
 @Component({
   selector: 'app-signin',
@@ -8,18 +7,9 @@ import { ActivatedRoute, Params } from '@angular/router';
 })
 export class SigninComponent implements OnInit {
 
-  constructor( private route: ActivatedRoute) { }
-  mode: number;
-  public Admin: boolean = true;
+  constructor() { }
 
   ngOnInit() {
-    this.route.params.forEach((params: Params) => {
-      this.mode = +params['mode'];
-      if(this.mode==1)
-      {
-        this.Admin=false;
-      }
-  });
   }
 
 }

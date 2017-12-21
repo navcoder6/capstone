@@ -2,9 +2,9 @@
   <h1 class="panel-heading">Welcome to Emergency and Security Incident Management Application</h1>
   <form class='panel-body'>
     <div class="form-group">
-    <button type="submit" [routerLink]="['/signin',0]" class="btn btn-info">Login</button>
-    <button type="submit" [routerLink]="['/signin',1]" class="btn btn-info">Login As Admin</button><br/><br/>
-    <p>Want a New Account?<a [routerLink]="['/register']" class="btn btn-xs btn-primary">Register</a></p>
+    <button type="submit" routerLink="../authenticate/user" class="btn btn-info">Login</button>
+    <button type="submit"  routerLink="../authenticate/admin" class="btn btn-info">Login As Admin</button><br/><br/>
+    <p>Want a New Account?<a routerLink="../authenticate/register" class="btn btn-xs btn-primary">Register</a></p>
     </div>
   </form>
 </div>
