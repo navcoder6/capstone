@@ -1,0 +1,17 @@
+Create Databse ESIM:
+
+>Use ESIM
+
+Create Document in Users Collection:
+
+> db.Users.insert({LoginID:"test@test.com"},{Password:"Test@123"},{IsAdmin:false
+},{IsActive:true},{CreatedOn:Date('Dec 12,2017')})
+
+Create Document in UserProfile Collection:
+
+> db.UserProfile.insert({FirstName:"Test"},{LastName:"1"},{Location:"Noida"},{EmailID:"test@test.com"},{MobileNumber:"8956451222"},{CreatedOn:Date('Dec 12,2017')})
+
+Create Document in Incident Collection
+
+> db.Incident.insert({ServiceType:"SOS"},{DepartmentName:"Fire"},{Location:"Noida"
+},{EmailID:"test@fire.com"},{Description:""},{Status:""},{Remarks:""},{CreatedOn:Date('Dec 12,2017')},{ModifiedOn:""})
