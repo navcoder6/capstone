@@ -1,10 +1,13 @@
-<div class="container panel panel-primary" style="text-align:center">
-  <h1 class="panel-heading">Welcome to Emergency and Security Incident Management Application</h1>
-  <form class='panel-body'>
-    <div class="form-group">
-    <button type="submit" routerLink="../authenticate/user" class="btn btn-info">Login</button>
-    <button type="submit"  routerLink="../authenticate/admin" class="btn btn-info">Login As Admin</button><br/><br/>
-    <p>Want a New Account?<a routerLink="../authenticate/register" class="btn btn-xs btn-primary">Register</a></p>
-    </div>
-  </form>
+<div fxLayout="row" fxLayout.gt-sm="column" class="main-bounds content">
+  <div fxHide fxHide.md="false" class="emergency-background">
+  </div>
+  <div>
+    <form class='panel-body'>
+      <div class="form-group">
+      <button type="submit" mat-raised-button color="primary" routerLink="../authenticate/user" class="btn btn-info">User Login</button>
+      <button type="submit" mat-raised-button color="primary" routerLink="../authenticate/admin" class="btn btn-info">Login As Admin</button>
+      <p>New User?<a routerLink="../authenticate/register" class="btn btn-xs btn-primary">Register Here</a></p>
+      </div>
+    </form>
+  </div>
 </div>

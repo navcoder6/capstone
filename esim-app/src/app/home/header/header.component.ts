@@ -6,8 +6,10 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./header.component.css']
 })
 export class HeaderComponent implements OnInit {
-
-  constructor() { }
+  public Header: string;
+  constructor() {
+    this.Header = 'Welcome to Emergency And Security Incident Management Application';
+   }
 
   ngOnInit() {
   }
