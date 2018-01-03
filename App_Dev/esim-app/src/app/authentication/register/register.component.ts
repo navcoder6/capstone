@@ -19,12 +19,17 @@ export class RegisterComponent implements OnInit {
   constructor(private _RegisterService: RegisterService,private route: ActivatedRoute, private router: Router) { }
   mode: number;
   public view: boolean = false;
+  RegDetails: any={};
   ngOnInit() {
     this.route.params.forEach((params: Params) => {
       this.mode = +params['mode'];
       if(this.mode==1)
       {
         this.view=true;
+        this._RegisterService.getregistrationDetails(sessionStorage["EmailID"]).subscribe(
+          (RegDetails:any) =>  this.RegDetails=RegDetails ,
+          err => console.log(err)
+        );
       }
   });
   }

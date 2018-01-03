@@ -7,13 +7,13 @@
             <label for="lblFirstName">First Name</label>
           </td>
           <td width="30%">
-            <input type="text" class="form-control" id="txtFirstName" [(ngModel)]="FName" name="FirstName" [disabled]="view">
+            <input type="text" class="form-control" id="txtFirstName" [(ngModel)]="RegDetails.FirstName" name="FirstName" [disabled]="view">
           </td> 
           <td width="20%">
               <label for="lblLastName">Last Name</label>
           </td>
           <td width="30%">
-              <input type="text" class="form-control" id="txtLastName" [(ngModel)]="LName" name="LastName">
+              <input type="text" class="form-control" id="txtLastName" [(ngModel)]="RegDetails.LastName" name="LastName" [disabled]="view">
           </td>
         </tr>
         <br/>
@@ -22,13 +22,13 @@
               <label for="lblEmailID">Email ID</label>
             </td>
             <td width="30%">
-              <input type="text" class="form-control" id="txtEmailID" [(ngModel)]="Email" name="EmailID">
+              <input type="text" class="form-control" id="txtEmailID" [(ngModel)]="RegDetails.EmailID" name="EmailID" [disabled]="view">
             </td>
             <td width="20%">
               <label for="lblPassword">Password</label>
             </td>
             <td width="30%">
-              <input type="text" class="form-control" id="txtPassword" [(ngModel)]="Password" name="Password">
+              <input type="text" class="form-control" id="txtPassword" [(ngModel)]="Password" name="Password" [disabled]="view">
             </td>
           </tr>
           <br/> 
@@ -37,20 +37,20 @@
               <label for="lblLocation">Location</label>
             </td>
             <td width="30%">
-              <input type="text" class="form-control" id="txtLocation" [(ngModel)]="Location" name="Location">
+              <input type="text" class="form-control" id="txtLocation" [(ngModel)]="RegDetails.Location" name="Location" [disabled]="view">
             </td>
             <td width="20%">
               <label for="lblMobile">Mobile No.</label>
             </td>
             <td width="30%">
-              <input type="text" class="form-control" id="txtMobile" [(ngModel)]="MNum" name="Mobile">
+              <input type="text" class="form-control" id="txtMobile" [(ngModel)]="RegDetails.MobileNum" name="Mobile" [disabled]="view">
             </td>
           </tr>
           <br/>
           <tr>
             <td colspan="4">
-                <button type="submit" class="btn btn-info">Register</button>
-                <button type="submit" class="btn btn-info">Clear</button>
+                <button type="submit" class="btn btn-info" [disabled]="view">Register</button>
+                <button type="submit" class="btn btn-info" [disabled]="view">Clear</button>
             </td>
           </tr>     
       </table>

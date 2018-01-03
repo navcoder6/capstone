@@ -60,20 +60,22 @@ router.put('/', function(req, res) {
   var returnvalue={};
   Credential.LoginID=req.body.LoginID;
   Credential.Password=req.body.Password;
-  AuthenticationApi.CheckCredential(Credential,req.UsersModel,function(err, Password) {
-    var a=JSON.stringify(Password);
-    if(Password!="" && Password!=null)
+  AuthenticationApi.CheckCredential(Credential,req.UsersModel,function(err, CredentialData) {
+    console.log("ARUN");
+    console.log(CredentialData);
+    if(CredentialData!="" && CredentialData!=null)
     {
       console.log("AAAAAAAAAAAAAAAAA");
-      console.log(Credential.Password);
+      console.log(CredentialData.Password);
+      console.log(CredentialData._id);
       /* bcrypt.compare(Credential.Password,Password['Password']).then(function(res){
         if(res==true)
           console.log("CCCCCCCCCCCCC");
         else
           console.log("DDDDDDDDDDDDDDD");
       }); */
-      if(bcrypt.compareSync(Credential.Password,Password['Password'])==true)
-        returnvalue.res="1";
+      if(bcrypt.compareSync(Credential.Password,CredentialData['Password'])==true)
+        returnvalue.res=CredentialData['_id'];
       else
         returnvalue.res="2";
     }
@@ -83,6 +85,15 @@ router.put('/', function(req, res) {
     }
     res.json(returnvalue);
   });
+});
+
+router.get('/:EmailID', function(req, res) {
+  AuthenticationApi.getregistrationDetails(req.params.EmailID,req.ProfileModel,function(err, RegDetails) {
+    console.log("DDDDDDDDDDDDDD");
+    console.log(req.params.EmailID);
+    console.log(RegDetails);
+    res.json(RegDetails);
+	});
 });
 
 module.exports = router;

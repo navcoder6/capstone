@@ -26,11 +26,11 @@ var AuthenticationApi = {
     },
     
     CheckCredential: function(Credential,UsersModel, callback) {
-        UsersModel.findOne({LoginID:Credential.LoginID},{Password:1,_id:0},function(err,Password){
+        UsersModel.findOne({LoginID:Credential.LoginID},{Password:1,_id:1},function(err,CredentialData){
             if(err)
                 console.log(err);
             else
-                callback(null,_clone(Password));
+                callback(null,_clone(CredentialData));
         });
 		//UserModel.findOne({ _id: id }, function (err, Boooks) {
 		//	if (err)
@@ -39,6 +39,16 @@ var AuthenticationApi = {
 		//		callback(null, _clone(Boooks));
 		//	}
 		//});
+    },
+    
+    getregistrationDetails: function(EmailID,ProfileModel, callback) {
+		ProfileModel.findOne({ EmailID: EmailID }, function (err, RegDetails) {
+			if (err)
+				console.log(err);
+			else {
+				callback(null, _clone(RegDetails));
+			}
+		});
 	},
 };
 module.exports = AuthenticationApi;

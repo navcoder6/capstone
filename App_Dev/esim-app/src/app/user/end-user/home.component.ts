@@ -1,12 +1,16 @@
 import { Component, OnInit } from '@angular/core';
+import { Router, ActivatedRoute, Params } from '@angular/router';
 
-/* @Component({
+@Component({
+  selector: 'app-User',
+  templateUrl: './home.component.html',
+  //styleUrls: ['./register.component.css']
 })
-export class HomeComponent implements OnInit {
+export class UserHomeComponent implements OnInit {
 
   constructor() { }
 
   ngOnInit() {
   }
 
-} */
+} 

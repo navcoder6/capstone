@@ -33,17 +33,21 @@ export class SigninComponent implements OnInit {
           LoginID:  formValue.email,
           Password: formValue.password,
         };
+    sessionStorage["EmailID"]=formValue.email;
     console.log(Credential);
     this._SignInService.CheckCredential(Credential).subscribe(
-      (result:any) =>  {if(result.res=="1"){
-      alert("Valid Login")
-      this.router.navigate(['/'])}
-    else if(result.res=="2"){
+      (result:any) =>  {if(result.res=="2"){
       alert("Invalid Password")
       return}
+    else if(result.res=="3"){
+      alert("Invalid Login ID")
+      return}
     else{
-        alert("Invalid Login ID")
-        return}},
+        alert(result.res);
+        sessionStorage["UserID"]=result.res;
+        console.log("ZZZZZZZZZZZZ");
+        console.log(sessionStorage["UserID"]);
+        this.router.navigate(['/userhome'])}},
       err => console.log(err)
     )
   }///

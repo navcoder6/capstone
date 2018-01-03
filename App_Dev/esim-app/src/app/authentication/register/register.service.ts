@@ -10,4 +10,8 @@ export class RegisterService {
   addUserProfile(newProfile: any) {
     return this._http.post(this._profileUrl,newProfile);
   }
+  
+  getregistrationDetails(EmailID: any){
+    return this._http.get(this._profileUrl+'/'+EmailID);
+  }
 }
