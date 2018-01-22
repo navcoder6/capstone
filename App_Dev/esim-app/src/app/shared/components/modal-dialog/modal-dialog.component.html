@@ -1,0 +1,11 @@
+<h1 mat-dialog-title>Message</h1>
+<div mat-dialog-content class="dialog-content">
+  {{data.Message}}
+  <div *ngIf="data.Buttons===1" class="modal-button-content">
+    <button mat-raised-button color="primary" (click)="CloseDialog()">OK</button>
+  </div>
+  <div *ngIf="data.Buttons===2" class="modal-button-content">
+      <button mat-raised-button color="primary" (click)="CloseDialog()">OK</button>
+      <button mat-raised-button color="primary" (click)="CloseDialog()">Cancel</button>
+    </div>
+</div>

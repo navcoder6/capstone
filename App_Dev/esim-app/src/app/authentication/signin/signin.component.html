@@ -1,71 +1,26 @@
-
-<!--<div class="container panel panel-primary" style="text-align:center">
-    <h1 class="panel-heading">Enter Credential to login into System</h1>
-    <form class='panel-body'>
-      <table align="center" width="40%" class="panel">
-        <tr *ngIf="Admin">
-          <td width="20%">
-            <label for="lblLoginId">Login ID</label>
-          </td>
-          <td width="20%">
-            <input type="text" class="form-control" id="txtLoginId" name="login">
-          </td>
-        </tr>
-        <br/>
-        <tr>
-            <td width="20%">
-              <label for="lblPassword">Paasword</label>
-            </td>
-            <td width="20%">
-              <input type="text" class="form-control" id="txtPassword" name="password">
-            </td>
-          </tr>
-          <br/> 
-          <tr>
-            <td colspan="2">
-                <button type="submit" class="btn btn-info">Login</button>
-                <button type="submit" class="btn btn-info">Cancel</button>
-            </td>
-          </tr>     
-      </table>
-    </form>
-  </div>-->
-  <div class="container panel panel-primary" style="text-align:center">
-    <h1 class="panel-heading">Enter Credential to login into System</h1>
-    <form #formRef="ngForm" class='panel-body' (ngSubmit)="onSubmit(formRef.value)">
-      <table align="center" width="40%" class="panel">
-        <tr>
-          <td colspan="2">
-              <img src="assets/images/Lock.jpg" class="img-thumbnail" alt="Cinque Terre" style="width:100%;height:60%">
-          </td>
-        </tr>
-        <tr>
-          <td colspan="2">
-            <div class="input-group form-group" style="width:80%;margin-left:10%" *ngIf="Admin">
-                <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-                <input id="txtEmail" type="text" class="form-control" name="email" [(ngModel)]="email" placeholder="Email" required #emailRef="ngModel">
-                <div *ngIf="emailRef.invalid && (emailRef.dirty || emailRef.touched)" class="alert alert-danger">
-                  <div *ngIf="emailRef.errors.required">
-                    Email is required.
-                  </div>
-                </div>
-            </div>
-              <br/>
-              <div class="input-group" style="width:80%;margin-left:10%">
-                <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
-                <input id="txtPassword" type="password" class="form-control" [(ngModel)]="password" name="password" placeholder="Password">
-              </div>
-            </td>
-        </tr>
-        <Br/>
-          <tr>
-            <td colspan="2">
-              <div style="width:80%;margin-left:10%">
-                <button type="submit" class="btn btn-info btn-block" >Login</button>
-              </div>
-            </td>
-          </tr>     
-      </table>
+<div class="transparent-background"></div>
+<div fxLayout="column" class="main-bounds">
+  <div class="center-div-desktop" [ngClass.sm]="{'center-div-medium-device':true}" [ngClass.xs]="{'center-div-small-device':true}">
+      <mat-toolbar class="toolbar">
+      <span class="toolbar-span">User Login</span>
+      </mat-toolbar>
+    <form fxLayout="column" [formGroup]="userLoginForm">
+      <mat-form-field>
+          <input matInput placeholder="Email ID" [formControl]="userLoginForm.controls['emailId']" required>
+          <mat-error *ngIf="userLoginForm.controls['emailId'].invalid">{{getEmailErrorMessage()}}</mat-error>
+        </mat-form-field>
+      <mat-form-field>
+        <input type="password" matInput placeholder="Password" [formControl]="userLoginForm.controls['password']" required>
+        <mat-error *ngIf="userLoginForm.controls['password'].invalid">Please enter password</mat-error>
+      </mat-form-field>
+      <div class="button-div-bounds">
+        <span>
+          <button [disabled]="userLoginForm.invalid" mat-raised-button color="primary" (click)="SignIn()">Sign In</button>
+        </span>
+        <span>
+          <button  routerLink="./../../home" mat-raised-button color="primary">Cancel</button>
+        </span>
+      </div>
     </form>
   </div>
-  
+</div>

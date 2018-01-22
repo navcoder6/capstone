@@ -1,10 +1,10 @@
-<div class="container panel panel-primary" style="text-align:center">
-  <h1 class="panel-heading">Welcome to Emergency and Security Incident Management Application</h1>
-  <form class='panel-body'>
-    <div class="form-group">
-    <button type="submit" [routerLink]="['/signin',0]" class="btn btn-info">Login</button>
-    <button type="submit" [routerLink]="['/signin',1]" class="btn btn-info">Login As Admin</button><br/><br/>
-    <p>Want a New Account?<a [routerLink]="['/register',0]" class="btn btn-xs btn-primary">Register</a></p>
-    </div>
-  </form>
+<div class="main-bounds content">
+  <div class="center-div">
+    <h1 class="home-font white-font-color" [ngStyle.xs]="{'font-size.px': 25}">Emergency &amp; Security Incident Management</h1>
+      <div class="form-group">
+      <button mat-raised-button color="warn" routerLink="../authenticate/user" class="btn btn-info">User Login</button>
+      <button mat-raised-button color="warn" routerLink="../authenticate/admin" class="btn btn-info">Admin Login</button>
+      <p class="para-font-style white-font-color">New User ? Register <a routerLink="../authenticate/register" class="white-font-color">here</a></p>
+      </div>
+  </div>
 </div>

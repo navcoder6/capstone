@@ -1,58 +1,41 @@
-<div class="container panel panel-primary" style="text-align:center">
-    <h1 class="panel-heading">Enter Registration Details</h1>
-    <form #formRef="ngForm" class='panel-body' (ngSubmit)="onSubmit(formRef.value)">
-      <table align="center" width="100%" class="panel">
-        <tr>
-          <td width="20%">
-            <label for="lblFirstName">First Name</label>
-          </td>
-          <td width="30%">
-            <input type="text" class="form-control" id="txtFirstName" [(ngModel)]="RegDetails.FirstName" name="FirstName" [disabled]="view">
-          </td> 
-          <td width="20%">
-              <label for="lblLastName">Last Name</label>
-          </td>
-          <td width="30%">
-              <input type="text" class="form-control" id="txtLastName" [(ngModel)]="RegDetails.LastName" name="LastName" [disabled]="view">
-          </td>
-        </tr>
-        <br/>
-        <tr>
-            <td width="20%">
-              <label for="lblEmailID">Email ID</label>
-            </td>
-            <td width="30%">
-              <input type="text" class="form-control" id="txtEmailID" [(ngModel)]="RegDetails.EmailID" name="EmailID" [disabled]="view">
-            </td>
-            <td width="20%">
-              <label for="lblPassword">Password</label>
-            </td>
-            <td width="30%">
-              <input type="text" class="form-control" id="txtPassword" [(ngModel)]="Password" name="Password" [disabled]="view">
-            </td>
-          </tr>
-          <br/> 
-          <tr>
-            <td width="20%">
-              <label for="lblLocation">Location</label>
-            </td>
-            <td width="30%">
-              <input type="text" class="form-control" id="txtLocation" [(ngModel)]="RegDetails.Location" name="Location" [disabled]="view">
-            </td>
-            <td width="20%">
-              <label for="lblMobile">Mobile No.</label>
-            </td>
-            <td width="30%">
-              <input type="text" class="form-control" id="txtMobile" [(ngModel)]="RegDetails.MobileNum" name="Mobile" [disabled]="view">
-            </td>
-          </tr>
-          <br/>
-          <tr>
-            <td colspan="4">
-                <button type="submit" class="btn btn-info" [disabled]="view">Register</button>
-                <button type="submit" class="btn btn-info" [disabled]="view">Clear</button>
-            </td>
-          </tr>     
-      </table>
+<div class="transparent-background"></div>
+<div class="main-bounds">
+  <div class="header-color header-div">
+    <h1 class="register-header white-font-color" [ngStyle.xs]="{'font-size.px': 15}">New User Registration</h1>
+    <div class="clear-icon-div">
+      <a routerLink="./../../home">
+        <mat-icon class="material-icons md-42 white-font-color clear-width">clear</mat-icon>
+      </a>
+    </div>
+  </div>
+  <div class="center-div-desktop" [ngClass.sm]="{'center-div-medium-device':true}" [ngClass.xs]="{'center-div-small-device':true}">
+    <form fxLayout="column" fxLayoutGap="10px" [formGroup]="registrationForm">
+      <mat-form-field>
+        <input matInput placeholder="First Name" [formControl]="registrationForm.controls['firstName']" required>
+        <mat-error *ngIf="registrationForm.controls['firstName'].invalid">You must enter a name</mat-error>
+      </mat-form-field>
+      <mat-form-field>
+        <input matInput placeholder="Last Name" [formControl]="registrationForm.controls['lastName']">
+      </mat-form-field>
+      <mat-form-field>
+        <input matInput placeholder="Email ID" [formControl]="registrationForm.controls['emailId']" required>
+        <mat-error *ngIf="registrationForm.controls['emailId'].invalid">{{getEmailErrorMessage()}}</mat-error>
+      </mat-form-field>
+      <mat-form-field>
+        <input [type]="passwordHide ? 'password':'text'" matInput placeholder="Password" required [formControl]="registrationForm.controls['password']">
+        <mat-icon matSuffix (click)="passwordHide=!passwordHide">{{passwordHide?'visibility':'visibility_off'}}</mat-icon>
+      </mat-form-field>
+      <mat-form-field>
+        <input matInput placeholder="Location" [formControl]="registrationForm.controls['location']" required>
+        <mat-error *ngIf="registrationForm.controls['location'].invalid">You must enter a Location</mat-error>
+      </mat-form-field>
+      <mat-form-field>
+        <input type="tel" matInput placeholder="Mobile No" [formControl]="registrationForm.controls['mobileNumber']" minlength="10"
+          maxlength="10" required>
+          <mat-icon matSuffix>phone</mat-icon>
+        <mat-error *ngIf="registrationForm.controls['mobileNumber'].invalid">You must enter a 10 digit Mobile Number</mat-error>
+      </mat-form-field>
+      <button [disabled]="registrationForm.invalid" mat-raised-button color="primary" (click)="RegisterUser()">Register</button>
     </form>
   </div>
+</div>

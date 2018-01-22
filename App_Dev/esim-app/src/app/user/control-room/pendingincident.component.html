@@ -1,0 +1,42 @@
+<h1 class="pending-incident-header" [ngStyle.xs]="{'font-size.px': 15}">Pending Incidents</h1>
+<mat-form-field>
+  <input matInput placeholder="Filter" (keyup)="applyFilter($event.target.value)" >
+</mat-form-field>
+<mat-table #serviceTable [dataSource]="IncidentDataSource">
+  <ng-container matColumnDef="serviceNo">
+    <mat-header-cell *matHeaderCellDef>No</mat-header-cell>
+    <mat-cell *matCellDef="let service; let i = index;">{{i+1}}</mat-cell>
+  </ng-container>
+  <ng-container matColumnDef="serviceType">
+    <mat-header-cell *matHeaderCellDef>Service Type</mat-header-cell>
+    <mat-cell *matCellDef="let service">{{service.ServiceType}}</mat-cell>
+  </ng-container>
+  <ng-container matColumnDef="department">
+    <mat-header-cell *matHeaderCellDef>Department</mat-header-cell>
+    <mat-cell *matCellDef="let service">{{service.DepartmentName}}</mat-cell>
+  </ng-container>
+  <ng-container matColumnDef="serviceDescription">
+    <mat-header-cell *matHeaderCellDef>Description</mat-header-cell>
+    <mat-cell *matCellDef="let service">{{service.Description}}</mat-cell>
+  </ng-container>
+  <ng-container matColumnDef="status">
+    <mat-header-cell *matHeaderCellDef>Status</mat-header-cell>
+    <mat-cell *matCellDef="let service">{{service.Status}}</mat-cell>
+  </ng-container>
+  <ng-container matColumnDef="remarks">
+    <mat-header-cell *matHeaderCellDef>Remarks</mat-header-cell>
+    <mat-cell *matCellDef="let service">{{service.Remarks}}</mat-cell>
+  </ng-container>
+  <ng-container matColumnDef="edit">
+    <mat-header-cell *matHeaderCellDef>Edit</mat-header-cell>
+    <mat-cell *matCellDef="let service">
+      <button mat-raised-button color="primary" routerLink="./../new-incident/{{service._id}}" >Edit</button>
+    </mat-cell>
+  </ng-container>
+  <mat-header-row *matHeaderRowDef="['serviceNo','serviceType','department','serviceDescription','status','remarks','edit']"></mat-header-row>
+  <mat-row *matRowDef="let rowData;columns:['serviceNo','serviceType','department','serviceDescription','status','remarks','edit']"></mat-row>
+</mat-table>
+<mat-paginator #paginator
+[pageSize]="10"
+[pageSizeOptions]="[5, 10, 20]">
+</mat-paginator>

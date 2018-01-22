@@ -1,126 +1,30 @@
 import { NgModule } from '@angular/core';
-/* import {
-  MatAutocompleteModule,
-  MatButtonModule,
-  MatButtonToggleModule,
-  MatCardModule,
-  MatCheckboxModule,
-  MatChipsModule,
-  MatDatepickerModule,
-  MatDialogModule,
-  MatExpansionModule,
-  MatGridListModule,
-  MatIconModule,
-  MatInputModule,
-  MatListModule,
-  MatMenuModule,
-  MatNativeDateModule,
-  MatPaginatorModule,
-  MatProgressBarModule,
-  MatProgressSpinnerModule,
-  MatRadioModule,
-  MatRippleModule,
-  MatSelectModule,
-  MatSidenavModule,
-  MatSliderModule,
-  MatSlideToggleModule,
-  MatSnackBarModule,
-  MatSortModule,
-  MatTableModule,
-  MatTabsModule,
-  MatToolbarModule,
-  MatTooltipModule,
-  MatStepperModule,
-} from '@angular/material';//Added by Arun */
-import { routing }  from '../app.routing';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
-import { UserHomeComponent } from './end-user/home.component';
-//import { ViewLoggedIncidentComponent } from './end-user/viewloggedincident.component';
-//import './polyfills';
-//import {platformBrowserDynamic} from '@angular/platform-browser-dynamic';//Added by Arun
-//import {BrowserModule} from '@angular/platform-browser';//Added by Arun
-//import {BrowserAnimationsModule} from '@angular/platform-browser/animations';//Added by Arun
-//import {NgModule} from '@angular/core';
-//import {FormsModule, ReactiveFormsModule} from '@angular/forms';//Added by Arun
+import {FlexLayoutModule} from '@angular/flex-layout';
+import {FormsModule,ReactiveFormsModule} from '@angular/forms';
+import { MediaMatcher } from '@angular/cdk/layout';
 
-//import {TableFilteringExample} from './app/table-filtering-example';
-//import {HttpModule} from '@angular/http';//Added by Arun
-//import {CdkTableModule} from '@angular/cdk/table';//Added by Arun
-
+import { UserComponent } from './user.component';
+import {SharedModule} from './../shared/shared.module';
+import {UserRoutingModules} from './user-routing.module';
+import { ViewRegistrationComponent } from './shared/components/view-registration/view-registration.component';
+import { LogIncidentComponent } from './general-user/log-incident/log-incident.component';
+import { IncidentsComponent } from './general-user/incidents/incidents.component';
+import { NewSecurityIncidentComponent } from './general-user/new-security-incident/new-security-incident.component';
+import { PendingIncidentComponent } from './control-room/pendingincident.component';//Added by Arun
+import { SendMessageComponent } from './control-room/sendmessage.component';//Added by Arun
+import { ServiceManagementComponent } from './../admin/service-management/service-management.component';//Added by Arun
 
 @NgModule({
   imports: [
     CommonModule,
+    FlexLayoutModule,
+    SharedModule,
+    UserRoutingModules,
     FormsModule,
-    routing
-  ],
-  declarations: [UserHomeComponent]
-})
-export class UserModule { } //Commented by Arun
-
-
-
-/* @NgModule({
-  exports: [
-    CdkTableModule,
-    MatAutocompleteModule,
-    MatButtonModule,
-    MatButtonToggleModule,
-    MatCardModule,
-    MatCheckboxModule,
-    MatChipsModule,
-    MatStepperModule,
-    MatDatepickerModule,
-    MatDialogModule,
-    MatExpansionModule,
-    MatGridListModule,
-    MatIconModule,
-    MatInputModule,
-    MatListModule,
-    MatMenuModule,
-    MatNativeDateModule,
-    MatPaginatorModule,
-    MatProgressBarModule,
-    MatProgressSpinnerModule,
-    MatRadioModule,
-    MatRippleModule,
-    MatSelectModule,
-    MatSidenavModule,
-    MatSliderModule,
-    MatSlideToggleModule,
-    MatSnackBarModule,
-    MatSortModule,
-    MatTableModule,
-    MatTabsModule,
-    MatToolbarModule,
-    MatTooltipModule,
-  ]
-}) //Added by Arun
-export class DemoMaterialModule {}  *///Added by Arun
-/* 
-@NgModule({
-  imports: [
-    BrowserModule,
-    BrowserAnimationsModule,
-    FormsModule,
-    HttpModule,
-    DemoMaterialModule,
-    MatNativeDateModule,
     ReactiveFormsModule,
-    CommonModule,
-    routing
   ],
-  //entryComponents: [TableFilteringExample],
-  declarations: [UserHomeComponent,ViewLoggedIncidentComponent]
-  //bootstrap: [TableFilteringExample],
-  //providers: []
-}) */ //Added by Arun
-//export class AppModule {}
-//export class UserModule { }
-
-//platformBrowserDynamic().bootstrapModule(UserModule); //Added by Arun
-
-
-
-
+  providers:[MediaMatcher],
+  declarations: [UserComponent, ViewRegistrationComponent, LogIncidentComponent, IncidentsComponent, NewSecurityIncidentComponent,PendingIncidentComponent,SendMessageComponent,ServiceManagementComponent]
+})
+export class UserModule { }

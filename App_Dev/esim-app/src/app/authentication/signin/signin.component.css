@@ -1,0 +1,70 @@
+.transparent-background {
+    height: 100%;
+    width: 100%;
+    display: block;
+    background-color: white;
+    opacity: 0.5;
+    position: fixed;
+    z-index: -1;
+}
+.main-bounds {
+    height: 100%;
+    width: 100%;
+    display: block;
+}
+.toolbar{
+    background-color: #4e4a4a;
+    height: 50px;
+}
+.toolbar-span{
+    font-family: Helvetica, Arial, sans-serif;
+    color: white;
+}
+.center-div-desktop {
+    width: 20%;
+    height: 230px;
+    display: block;
+    text-align: center;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: white;
+    overflow-y: hidden;
+    overflow-x: hidden;
+    border-radius: 10px;
+}
+
+.center-div-medium-device {
+    width: 40%;
+    height: 230px;
+    display: block;
+    text-align: center;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: white;
+    overflow-y: auto;
+    overflow-x: hidden;
+    border-radius: 10px;
+}
+
+.center-div-small-device {
+    width: 80%;
+    height: 230px;
+    display: block;
+    text-align: center;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: white;
+    overflow-y: auto;
+    overflow-x: hidden;
+    border-radius: 10px;
+}
+.button-div-bounds{
+    width: 100%;
+    display: table;
+}
+.button-div-bounds>span{
+    display: table-cell;
+}
+.button-div-bounds button{
+    width: 90%;
+}

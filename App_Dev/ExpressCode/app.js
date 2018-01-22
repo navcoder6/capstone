@@ -12,6 +12,10 @@ var index = require('./routes/index');
 var users = require('./routes/users');
 var register = require('./routes/Authentication');///
 var signin = require('./routes/Authentication');///
+var incident = require('./routes/users');//Added by Arun
+var NewService = require('./routes/users');//Added by Arun
+var EmailIdsList = require('./routes/users');//Added by Arun
+
 
 
 var app = express();
@@ -44,9 +48,35 @@ var UserCredentialSchema = new mongoose.Schema({
 collection: 'Users'
 });///
 
+var IncidentSchema = new mongoose.Schema({
+  //_id:String,
+  ServiceType: String,
+  DepartmentName: String,
+  Location:String,
+  EmailID: String,
+  Status: String,
+  Remarks: String,
+  CreatedOn: Date,
+  ModifiedOn: Date,
+},{
+collection: 'Incident'
+});//Added by Arun
+
+var DepartmentSchema = new mongoose.Schema({
+  //_id:String,
+  DepartmentName: String,
+  EmailID: String,
+  MobileNum: String,
+  CreatedOn: Date,
+},{
+collection: 'Department'
+});//Added by Arun
+
 var ProfileModel = mongoose.model('ProfileDetails', UserProfileSchema); ///
 
 var UsersModel = mongoose.model('UsersSchema', UserCredentialSchema); ///
+var IncidentsModel = mongoose.model('IncidentSchema', IncidentSchema);//Added by Arun
+var DepartmentsModel = mongoose.model('DepartmentSchema', DepartmentSchema);//Added by Arun
 
 
 // view engine setup
@@ -65,12 +95,17 @@ app.use(cors());///
 app.use('/',function (req, res,next) {
   req.ProfileModel=ProfileModel;
   req.UsersModel=UsersModel;
+  req.IncidentsModel=IncidentsModel;//Added by Arun
+  req.DepartmentsModel=DepartmentsModel;//Added by Arun
   next();
 }); ///
 app.use('/', index);
 app.use('/users', users);
 app.use('/register', register);///
 app.use('/signin', signin);
+app.use('/Incident', incident);//Added by Arun
+app.use('/NewService', NewService);//Added by Arun
+app.use('/EmailIdsList', EmailIdsList);//Added by Arun
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   var err = new Error('Not Found');

@@ -1,54 +1,74 @@
 import { Component, OnInit } from '@angular/core';
-import { Router,ActivatedRoute, Params } from '@angular/router';
-import { SignInService } from "./signin.service";
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { MatDialog } from '@angular/material';
+
+import { slideInAnimation } from './../../animations/index';
+import { AuthenticationService } from './../services/index';
+import { ModalDialogComponent } from './../../shared/components/index';
 
 @Component({
   selector: 'app-signin',
   templateUrl: './signin.component.html',
-  styleUrls: ['./signin.component.css']
+  styleUrls: ['./signin.component.css'],
+  animations: [slideInAnimation],
+  host: { '[@slideInAnimation]': '' }
 })
 export class SigninComponent implements OnInit {
-  EmailID:string;///
-  Password:string;///
 
-  constructor(private _SignInService: SignInService,private route: ActivatedRoute, private router: Router) { }///
-  //constructor( private route: ActivatedRoute) { }
-  mode: number;
-  public Admin: boolean = true;
-  result:any[];
-
-  ngOnInit() {
-    this.route.params.forEach((params: Params) => {
-      this.mode = +params['mode'];
-      if(this.mode==1)
-      {
-        this.Admin=false;
-      }
-  });
+  public userLoginForm: FormGroup;
+  constructor(private _SignInService: AuthenticationService
+    , private router: Router
+    , private dialog: MatDialog
+    , fb: FormBuilder) {
+    this.userLoginForm = fb.group({
+      'emailId': ['', [Validators.required, Validators.email]],
+      'password': ['', Validators.required]
+    });
   }
 
-  onSubmit(formValue: any):void{
-    console.log("Form Value = " + JSON.stringify(formValue, null, 4));
+  ngOnInit() {
+  }
+
+  getEmailErrorMessage() {
+    return this.userLoginForm.controls['emailId'].hasError('required') ?
+      'You must enter an Email Id' :
+      this.userLoginForm.controls['emailId'].hasError('email') ?
+        'Not valid Email'
+        : '';
+  }
+
+  SignIn() {
     let Credential = {
-          LoginID:  formValue.email,
-          Password: formValue.password,
-        };
-    sessionStorage["EmailID"]=formValue.email;
-    console.log(Credential);
-    this._SignInService.CheckCredential(Credential).subscribe(
-      (result:any) =>  {if(result.res=="2"){
-      alert("Invalid Password")
-      return}
-    else if(result.res=="3"){
-      alert("Invalid Login ID")
-      return}
-    else{
-        alert(result.res);
-        sessionStorage["UserID"]=result.res;
-        console.log("ZZZZZZZZZZZZ");
-        console.log(sessionStorage["UserID"]);
-        this.router.navigate(['/userhome'])}},
+      LoginID: this.userLoginForm.controls['emailId'].value,
+      Password: this.userLoginForm.controls['password'].value,
+      IsAdmin:false //Added by Arun
+    };
+    this._SignInService.SignIn(Credential).subscribe(
+      (result: any) => {
+        if (result.res == "2") {
+          this.dialog.open(ModalDialogComponent, {
+            data: {
+              Message: 'Invalid Password. Please reenter details.',
+              Buttons: 1
+            }
+          });
+        }
+        else if (result.res == "3") {
+          this.dialog.open(ModalDialogComponent, {
+            data: {
+              Message: 'Invalid EmailID. Please reenter details.',
+              Buttons: 1
+            }
+          });
+        }
+        else {
+          sessionStorage["EmailID"]=Credential.LoginID;
+          sessionStorage["UserID"] = result.res;
+          this.router.navigate(['/user'])
+        }
+      },
       err => console.log(err)
     )
-  }///
+  }
 }

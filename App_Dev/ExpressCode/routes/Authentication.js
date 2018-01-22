@@ -60,6 +60,8 @@ router.put('/', function(req, res) {
   var returnvalue={};
   Credential.LoginID=req.body.LoginID;
   Credential.Password=req.body.Password;
+  Credential.IsAdmin=req.body.IsAdmin;//Added by Arun
+  console.log(Credential.IsAdmin);
   AuthenticationApi.CheckCredential(Credential,req.UsersModel,function(err, CredentialData) {
     console.log("ARUN");
     console.log(CredentialData);
@@ -74,10 +76,20 @@ router.put('/', function(req, res) {
         else
           console.log("DDDDDDDDDDDDDDD");
       }); */
-      if(bcrypt.compareSync(Credential.Password,CredentialData['Password'])==true)
-        returnvalue.res=CredentialData['_id'];
+      if(Credential.IsAdmin==false)
+      {
+        if(bcrypt.compareSync(Credential.Password,CredentialData['Password'])==true)
+          returnvalue.res=CredentialData['_id'];
+        else
+          returnvalue.res="2";
+      }
       else
-        returnvalue.res="2";
+      {
+        if(CredentialData['Password']==Credential.Password)
+          returnvalue.res="1";
+        else
+          returnvalue.res="2";
+      }//Added by Arun
     }
     else
     {
@@ -95,5 +107,7 @@ router.get('/:EmailID', function(req, res) {
     res.json(RegDetails);
 	});
 });
+
+
 
 module.exports = router;

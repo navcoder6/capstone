@@ -1,60 +1,82 @@
 import { Component, OnInit } from '@angular/core';
-import { Router, ActivatedRoute, Params } from '@angular/router';///
-import { RegisterService } from "./register.service";///
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { MatDialog } from '@angular/material';
+
+import { slideInAnimation } from './../../animations/index';
+import { RegistrationService } from './../services/index';
+import { ModalDialogComponent } from './../../shared/components/index';
 
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
-  styleUrls: ['./register.component.css']
+  styleUrls: ['./register.component.css'],
+  animations: [slideInAnimation],
+  host: { '[@slideInAnimation]': '' }
 })
 export class RegisterComponent implements OnInit {
-  FirstName:string;
-  LastName:string;
-  EmailID:string;
-  Password:string;
-  Location:string;
-  MobileNum:string;
-  CreatedOn:Date;
+  public passwordHide: boolean = true;
+  public registrationForm: FormGroup;
 
-  constructor(private _RegisterService: RegisterService,private route: ActivatedRoute, private router: Router) { }
-  mode: number;
-  public view: boolean = false;
-  RegDetails: any={};
-  ngOnInit() {
-    this.route.params.forEach((params: Params) => {
-      this.mode = +params['mode'];
-      if(this.mode==1)
-      {
-        this.view=true;
-        this._RegisterService.getregistrationDetails(sessionStorage["EmailID"]).subscribe(
-          (RegDetails:any) =>  this.RegDetails=RegDetails ,
-          err => console.log(err)
-        );
-      }
-  });
+  constructor(private _RegisterService: RegistrationService
+    , private router: Router
+    , private dialog: MatDialog
+    , fb: FormBuilder) {
+    this.registrationForm = fb.group({
+      'firstName': ['', Validators.required],
+      'lastName': [''],
+      'emailId': ['', [Validators.required, Validators.email]],
+      'location': ['', Validators.required],
+      'password': ['', Validators.required],
+      'mobileNumber': ['', Validators.required]
+    });
   }
-  onSubmit(formValue: any):void{
-    console.log("Form Value = " + JSON.stringify(formValue, null, 4));
+
+  ngOnInit() {
+  }
+
+  getEmailErrorMessage() {
+    return this.registrationForm.controls['emailId'].hasError('required') ?
+      'You must enter an Email Id' :
+      this.registrationForm.controls['emailId'].hasError('email') ?
+        'Not valid Email'
+        : '';
+  }
+
+  RegisterUser() {
     let newProfile = {
-          FirstName: formValue.FirstName,
-          LastName: formValue.LastName,
-          EmailID:  formValue.EmailID,
-          Password: formValue.Password,
-          Location: formValue.Location,
-          MobileNum: formValue.Mobile,
-          CreatedOn: new Date()
-        };
+      FirstName: this.registrationForm.controls['firstName'].value,
+      LastName: this.registrationForm.controls['lastName'].value,
+      EmailID: this.registrationForm.controls['emailId'].value,
+      Password: this.registrationForm.controls['password'].value,
+      Location: this.registrationForm.controls['location'].value,
+      MobileNum: this.registrationForm.controls['mobileNumber'].value,
+      CreatedOn: new Date()
+    };
     console.log(newProfile);
     this._RegisterService.addUserProfile(newProfile).subscribe(
-      (result:any) =>  {if(result.res=="1"){
-        alert("User Successfully Registered.");
-        this.router.navigate(['/'])}
-    else{
-        alert("Email ID already exist for some other user.")
-        return}},
-      err => console.log(err)
-    )
-    
+      (result: any) => {
+        if (result.res == "1") {
+          let dialogRef = this.dialog.open(ModalDialogComponent, {
+            data: {
+              Message: 'User profile created. Please Log in with new credentials',
+              Buttons: 1
+            }
+          })
+          // alert("User Successfully Registered.");
+          dialogRef.afterClosed().subscribe(() => {
+            this.router.navigate(['/']);
+          });
+        }
+        else {
+          this.dialog.open(ModalDialogComponent, {
+            data: {
+              Message: 'Email ID already exist for some other user!!!',
+              Buttons: 1
+            }
+          })
+        }
+      },
+      err => console.log(err))
   }
 }
-
