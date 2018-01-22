@@ -4,7 +4,7 @@
 </mat-form-field>
 <mat-table #serviceTable [dataSource]="IncidentDataSource">
   <ng-container matColumnDef="serviceNo">
-    <mat-header-cell *matHeaderCellDef>No</mat-header-cell>
+    <mat-header-cell *matHeaderCellDef>No.</mat-header-cell>
     <mat-cell *matCellDef="let service; let i = index;">{{i+1}}</mat-cell>
   </ng-container>
   <ng-container matColumnDef="serviceType">
@@ -31,6 +31,6 @@
   <mat-row *matRowDef="let rowData;columns:['serviceNo','serviceType','department','serviceDescription','status','remarks']"></mat-row>
 </mat-table>
 <mat-paginator #paginator
-  [pageSize]="10"
-  [pageSizeOptions]="[5, 10, 20]">
+                [pageSize]="10"
+                [pageSizeOptions]="[5, 10, 20]">
 </mat-paginator>

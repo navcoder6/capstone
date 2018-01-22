@@ -3,6 +3,7 @@ import {EsimService} from './../../shared/services//index';
 import {ModalDialogComponent} from './../../shared/components/index';
 import { MatDialog } from '@angular/material';
 import {Location} from '@angular/common';
+import {FormBuilder,FormGroup,Validators} from '@angular/forms';
 
 @Component({
   selector: 'app-message',
@@ -11,7 +12,13 @@ import {Location} from '@angular/common';
 })
 export class SendMessageComponent  {
   public EmailIdsList;
-  constructor(private _EsimService: EsimService,private dialog:MatDialog,private location:Location) { } 
+  public sendMsgForm: FormGroup;
+  constructor(private _EsimService: EsimService,private dialog:MatDialog,private location:Location,fb:FormBuilder) {
+    this.sendMsgForm = fb.group({
+      'subject':['',Validators.required],
+      'message':['',Validators.required],
+    });
+   } 
   
 
   public SendMessage(){
