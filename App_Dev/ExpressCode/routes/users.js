@@ -8,10 +8,16 @@ var router = express.Router();
 /* router.get('/', function(req, res, next) {
   res.send('respond with a resource');
 });  Commented by Arun */  
-router.get('/', function(req, res) {
-  AuthenticationApi.getEmailIdsList(req.UsersModel,function(err, EmailList) {
-    console.log(EmailList);
-    res.json(EmailList);
+router.post('/:EmailID', function(req, res) {
+  var NewMsg = {};
+  NewMsg.Subject = req.body.Subject;
+  NewMsg.Message = req.body.Message;
+  NewMsg.SenderEmailID = req.body.EmailID;
+  NewMsg.CreatedOn=req.body.CreatedOn;
+  AuthenticationApi.SaveMsg(NewMsg,req.AlertMessageModel,function(err, MsgInfo) {
+    console.log(MsgInfo);
+    MsgInfo.res="1";
+    res.json(MsgInfo);
 	});
 }); //Added by Arun
 router.get('/:EmailID', function(req, res) {
@@ -43,4 +49,25 @@ router.post('/', function(req, res) {
     }
   });
 });
+//for Control room User
+router.get('/:EmailID', function(req, res) {
+  IncidentList={};
+  AuthenticationApi.GetDepartmentName(req.params.EmailID,req.DepartmentsModel,function(err, DepartmentName) {
+    if(DepartmentName=="" || DepartmentName==null)
+    {
+      res.json(IncidentList);
+    }
+    else{
+      AuthenticationApi.getPendingIncidentList(DepartmentName,req.IncidentsModel,function(err, IncidentList) {
+         res.json(IncidentList);
+      });
+    }
+  });
+});
+
+router.get('/', function(req, res) {
+  AuthenticationApi.getMsgList(req.AlertMessageModel,function(err, MessageList) {
+    res.json(MessageList);
+	});
+}); //Added by Arun
 module.exports = router;

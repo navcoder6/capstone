@@ -6,7 +6,8 @@ export class EsimService {
   private _CredentialUrl = "http://localhost:3000/signin";
   private _IncidentUrl = "http://localhost:3000/Incident"; //Added by Arun
   private _AddServiceUrl = "http://localhost:3000/NewService"; //Added by Arun
-  private _EmailIDsListUrl = "http://localhost:3000/EmailIdsList"; //Added by Arun
+  private _EmailIDsListUrl = "http://localhost:3000/SaveMsg"; //Added by Arun
+  private _MessageListUrl = "http://localhost:3000/MsgList"; //Added by Arun
   constructor(private _http: HttpClient) { }
 
   public SignIn(Credential: any) {
@@ -36,7 +37,11 @@ export class EsimService {
   addNewService(newService: any) {
     return this._http.post(this._AddServiceUrl,newService);
   }//Added by Arun
-  getAllEmailIdsList(){
-    return this._http.get(this._EmailIDsListUrl);
+  SaveMsg(newMsg: any){
+    return this._http.post(this._EmailIDsListUrl+'/'+newMsg.EmailID,newMsg);
+  } //Added by Arun
+
+  getMessageList(){
+    return this._http.get(this._MessageListUrl);
   } //Added by Arun
 }

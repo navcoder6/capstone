@@ -36,6 +36,10 @@ export class UserComponent implements OnInit {
       {
         Display: 'Add Service',
         Path: 'addservice'
+      },//Added by Arun Temp
+      {
+        Display: 'View Alert Message',
+        Path: 'viewalertmsg'
       }//Added by Arun Temp
     ];
   public isMenuOpen: boolean = true;

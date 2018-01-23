@@ -23,15 +23,31 @@ export class SendMessageComponent  {
 
   public SendMessage(){
     //console.log(service);
-    this._EsimService.getAllEmailIdsList().subscribe(
-      (EmailIdsList:any) =>  {this.EmailIdsList = EmailIdsList
-        let dialogRef =this.dialog.open(ModalDialogComponent,{
-          data:{
-            Message: 'Message sent successfully.',
-            Buttons:1
-          }
-        });
-      },
+    let newMsg = {
+      Subject: this.sendMsgForm.controls['subject'].value,
+      Message: this.sendMsgForm.controls['message'].value,
+      EmailID: sessionStorage["EmailID"],
+      CreatedOn: new Date()
+    };
+    this._EsimService.SaveMsg(newMsg).subscribe(
+      (MsgInfo:any) =>  {
+        if (MsgInfo.res == "1") {
+          let dialogRef = this.dialog.open(ModalDialogComponent, {
+            data: {
+              Message: 'Message sent successfully.',
+              Buttons: 1
+            }
+          })
+        }
+        else {
+          this.dialog.open(ModalDialogComponent, {
+            data: {
+              Message: 'Error occured while sending message.',
+              Buttons: 1
+            }
+          })
+      }
+    },
       err => console.log(err)
     );
     /* let dialogRef =this.dialog.open(ModalDialogComponent,{

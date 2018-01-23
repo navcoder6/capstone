@@ -9,6 +9,7 @@ import {NewSecurityIncidentComponent} from './general-user/new-security-incident
 import {PendingIncidentComponent} from './control-room/pendingincident.component';//Added by Arun Temp
 import {SendMessageComponent} from './control-room/sendmessage.component';//Added by Arun Temp
 import {ServiceManagementComponent} from './../admin/service-management/service-management.component';//Added by Arun Temp
+import { ViewMessageComponent } from './shared/components/view-message/view-message.component';
 
 const UserRoutes: Routes = [
     {
@@ -47,6 +48,10 @@ const UserRoutes: Routes = [
             {
                 path:'addservice',
                 component:ServiceManagementComponent
+            },//Added by Arun Temp
+            {
+                path:'viewalertmsg',
+                component:ViewMessageComponent
             }//Added by Arun Temp
         ]
     }

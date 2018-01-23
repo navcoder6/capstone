@@ -83,12 +83,51 @@ var AuthenticationApi = {
         });
     },
 
-    getEmailIdsList: function(UsersModel, callback) {
+    /* getEmailIdsList: function(UsersModel, callback) {
 		UsersModel.find({},{LoginID:1,_id:0}, function (err, EmailList) {
 			if (err)
 				console.log(err);
 			else {
 				callback(null, _clone(EmailList));
+			}
+		});
+    }, */
+    SaveMsg: function(NewMsg,AlertMessageModel, callback) {
+		AlertMessageModel.create(NewMsg, function (err, MsgInfo) {
+			if (err)
+				console.log(err);
+			else {
+				callback(null, _clone(MsgInfo));
+			}
+		});
+    },
+    //Added for getting department name for control room user
+    getDepartmentName: function(EmailID,DepartmentsModel,callback){
+        DepartmentsModel.find({EmailID:EmailID},{DepartmentName:1,_id:1},function (err, DepartmentName){
+			if (err)
+				console.log(err);
+			else {
+				callback(null, _clone(DepartmentName));
+			}
+		});
+    },
+    //getting incident lists pending with the control room user on the basis on departmentname
+    getPendingIncidentList: function(DepartmentName,IncidentsModel, callback) {
+		IncidentsModel.find({ DepartmentName: DepartmentName }, function (err, IncidentList) {
+			if (err)
+				console.log(err);
+			else {
+				callback(null, _clone(IncidentList));
+			}
+		});
+    },
+
+    getMsgList: function(AlertMessageModel, callback) {
+		AlertMessageModel.find( function (err, MessageList) {
+			if (err)
+				console.log(err);
+			else {
+				callback(null, _clone(MessageList));
 			}
 		});
     },

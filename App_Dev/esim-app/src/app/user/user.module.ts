@@ -14,6 +14,7 @@ import { NewSecurityIncidentComponent } from './general-user/new-security-incide
 import { PendingIncidentComponent } from './control-room/pendingincident.component';//Added by Arun
 import { SendMessageComponent } from './control-room/sendmessage.component';//Added by Arun
 import { ServiceManagementComponent } from './../admin/service-management/service-management.component';//Added by Arun
+import { ViewMessageComponent } from './shared/components/view-message/view-message.component';//Added by Arun
 
 @NgModule({
   imports: [
@@ -25,6 +26,6 @@ import { ServiceManagementComponent } from './../admin/service-management/servic
     ReactiveFormsModule,
   ],
   providers:[MediaMatcher],
-  declarations: [UserComponent, ViewRegistrationComponent, LogIncidentComponent, IncidentsComponent, NewSecurityIncidentComponent,PendingIncidentComponent,SendMessageComponent,ServiceManagementComponent]
+  declarations: [UserComponent, ViewRegistrationComponent, LogIncidentComponent, IncidentsComponent, NewSecurityIncidentComponent,PendingIncidentComponent,SendMessageComponent,ServiceManagementComponent,ViewMessageComponent]
 })
 export class UserModule { }

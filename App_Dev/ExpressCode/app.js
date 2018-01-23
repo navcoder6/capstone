@@ -14,7 +14,8 @@ var register = require('./routes/Authentication');///
 var signin = require('./routes/Authentication');///
 var incident = require('./routes/users');//Added by Arun
 var NewService = require('./routes/users');//Added by Arun
-var EmailIdsList = require('./routes/users');//Added by Arun
+var SaveMsg = require('./routes/users');//Added by Arun
+var MsgList = require('./routes/users');//Added by Arun
 
 
 
@@ -72,11 +73,22 @@ var DepartmentSchema = new mongoose.Schema({
 collection: 'Department'
 });//Added by Arun
 
+var AlertMessageSchema = new mongoose.Schema({
+  //_id:String,
+  Subject: String,
+  Message: String,
+  SenderEmailID: String,
+  CreatedOn: Date,
+},{
+collection: 'AlertMessage'
+});//Added by Arun
+
 var ProfileModel = mongoose.model('ProfileDetails', UserProfileSchema); ///
 
 var UsersModel = mongoose.model('UsersSchema', UserCredentialSchema); ///
 var IncidentsModel = mongoose.model('IncidentSchema', IncidentSchema);//Added by Arun
 var DepartmentsModel = mongoose.model('DepartmentSchema', DepartmentSchema);//Added by Arun
+var AlertMessageModel = mongoose.model('AlertMessageSchema', AlertMessageSchema);//Added by Arun
 
 
 // view engine setup
@@ -97,6 +109,7 @@ app.use('/',function (req, res,next) {
   req.UsersModel=UsersModel;
   req.IncidentsModel=IncidentsModel;//Added by Arun
   req.DepartmentsModel=DepartmentsModel;//Added by Arun
+  req.AlertMessageModel=AlertMessageModel;//Added by Arun
   next();
 }); ///
 app.use('/', index);
@@ -105,7 +118,8 @@ app.use('/register', register);///
 app.use('/signin', signin);
 app.use('/Incident', incident);//Added by Arun
 app.use('/NewService', NewService);//Added by Arun
-app.use('/EmailIdsList', EmailIdsList);//Added by Arun
+app.use('/SaveMsg', SaveMsg);//Added by Arun
+app.use('/MsgList',MsgList)
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   var err = new Error('Not Found');
