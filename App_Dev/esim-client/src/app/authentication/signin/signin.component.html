@@ -1,0 +1,26 @@
+<div class="transparent-background"></div>
+<div fxLayout="column" class="main-bounds">
+  <div class="center-div-desktop" [ngClass.sm]="{'center-div-medium-device':true}" [ngClass.xs]="{'center-div-small-device':true}">
+      <mat-toolbar class="toolbar">
+      <span class="toolbar-span">User Login</span>
+      </mat-toolbar>
+    <form fxLayout="column" [formGroup]="userLoginForm">
+      <mat-form-field>
+          <input matInput placeholder="Email ID" [formControl]="userLoginForm.controls['emailId']" required>
+          <mat-error *ngIf="userLoginForm.controls['emailId'].invalid">{{getEmailErrorMessage()}}</mat-error>
+        </mat-form-field>
+      <mat-form-field>
+        <input type="password" matInput placeholder="Password" [formControl]="userLoginForm.controls['password']" required>
+        <mat-error *ngIf="userLoginForm.controls['password'].invalid">Please enter password</mat-error>
+      </mat-form-field>
+      <div class="button-div-bounds">
+        <span>
+          <button [disabled]="userLoginForm.invalid" mat-raised-button color="primary" (click)="SignIn()">Sign In</button>
+        </span>
+        <span>
+          <button  routerLink="./../../home" mat-raised-button color="primary">Cancel</button>
+        </span>
+      </div>
+    </form>
+  </div>
+</div>

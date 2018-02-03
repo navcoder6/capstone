@@ -1,0 +1,28 @@
+{
+  "name": "emergency-security-incident-management-api",
+  "version": "1.0.0",
+  "description": "An API specifically for the ESIM application using express, mongoose",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Navneet Verma & Arun Kumar",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "body-parser": "^1.18.2",
+    "cors": "^2.8.4",
+    "express": "^4.16.2",
+    "express-validation": "^1.0.2",
+    "http-status": "^1.0.1",
+    "joi": "^13.1.0",
+    "jsonwebtoken": "^8.1.0",
+    "lodash": "^4.17.4",
+    "mongoose": "^4.13.9",
+    "morgan": "^1.9.0",
+    "node-where": "^1.1.0",
+    "nodemailer": "^4.4.2",
+    "passport": "^0.4.0",
+    "passport-jwt": "^3.0.1",
+    "serve-favicon": "^2.4.5",
+    "twitter": "^1.7.1"
+  }
+}

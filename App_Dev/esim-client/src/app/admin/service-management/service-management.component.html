@@ -1,0 +1,38 @@
+<div class="side-form">
+  <h1 class="header-font" [ngStyle.xs]="{'font-size.px': 15}">Add New Service </h1>
+  <div class="form-container">
+    <form fxLayout="column" fxLayoutGap="10px" [formGroup]="serviceregForm">
+        <mat-form-field>
+          <input matInput [(ngModel)]="departmentName" placeholder="Department Name" [formControl]="serviceregForm.controls['deptName']" required>
+          <mat-error *ngIf="serviceregForm.controls['deptName'].invalid">You must enter a name</mat-error>
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput [(ngModel)]="emailId"  placeholder="Email ID" [formControl]="serviceregForm.controls['emailId']" required>
+          <mat-error *ngIf="serviceregForm.controls['emailId'].invalid">{{getEmailErrorMessage()}}</mat-error>
+        </mat-form-field>
+        <mat-form-field>
+          <input type="tel" [(ngModel)]="mobileNumber"  matInput placeholder="Mobile No" [formControl]="serviceregForm.controls['mobileNumber']" minlength="10"
+            maxlength="10" required>
+            <mat-icon matSuffix>phone</mat-icon>
+            <mat-error *ngIf="serviceregForm.controls['mobileNumber'].invalid">You must enter a Mobile Number</mat-error>
+        </mat-form-field>
+       <!--  <section class="checkbox-section">
+        <mat-checkbox class="checkbox-margin">
+          SOS
+        </mat-checkbox>
+        <mat-checkbox>
+          Non SOS
+        </mat-checkbox> -->
+        <mat-form-field>
+          <mat-select placeholder="Service Type" [(ngModel)]="servicetype" [formControl]="serviceregForm.controls['servicetype']" required>
+            <mat-option *ngFor="let servicetype of serviceList" [value]="servicetype">{{servicetype}}</mat-option>
+          </mat-select>
+          <mat-error *ngIf="serviceregForm.controls['servicetype'].hasError('required')">You must select a Service Type.</mat-error>
+        </mat-form-field>
+    </form>
+  </div>
+  <div class="mid-content">
+    <button mat-raised-button [disabled]="serviceregForm.invalid" (click)="SaveService()" color="primary">Add</button> 
+    <button mat-raised-button (click)="Clear()" color="primary">Clear</button> 
+  </div>
+</div> 

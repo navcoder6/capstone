@@ -1,0 +1,24 @@
+<h1 class="log-incident-header" [ngStyle.xs]="{'font-size.px': 15}">Log Incident</h1>
+  <mat-form-field>
+    <input matInput placeholder="Filter" (keyup)="applyFilter($event.target.value)" >
+  </mat-form-field>
+  <mat-table #serviceTable [dataSource]="serviceDataSource">
+    <ng-container matColumnDef="serviceType">
+      <mat-header-cell *matHeaderCellDef>Service Type</mat-header-cell>
+      <mat-cell *matCellDef="let service">{{service.Type}}</mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="sosSelect">
+      <mat-header-cell *matHeaderCellDef></mat-header-cell>
+      <mat-cell *matCellDef="let service">
+        <button mat-fab color="warn" (click)="SendSoS(service)" >SOS</button>
+      </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="nonSoSSelect">
+      <mat-header-cell *matHeaderCellDef></mat-header-cell>
+      <mat-cell *matCellDef="let service">
+        <button mat-fab color="primary" routerLink="./../new-incident/{{service.Type}}" >NonSoS</button>
+      </mat-cell>
+    </ng-container>
+    <mat-header-row *matHeaderRowDef="['serviceType','sosSelect','nonSoSSelect']"></mat-header-row>
+    <mat-row *matRowDef="let rowData;columns:['serviceType','sosSelect','nonSoSSelect']"></mat-row>
+  </mat-table>

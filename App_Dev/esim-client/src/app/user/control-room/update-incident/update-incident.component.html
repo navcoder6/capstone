@@ -1,0 +1,41 @@
+<div class="side-form">
+  <h1 class="header-font" [ngStyle.xs]="{'font-size.px': 15}">Update Security Incident </h1>
+  <div class="form-container">
+    <form fxLayout="column" fxLayoutGap="10px" [formGroup]="incidentForm">
+        <mat-form-field>
+          <input matInput [(ngModel)]="registrationDetail.FirstName" placeholder="First Name" [formControl]="incidentForm.controls['firstName']">
+          <!-- <mat-error *ngIf="registrationForm.controls['firstName'].invalid">You must enter a name</mat-error> -->
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput [(ngModel)]="registrationDetail.LastName"  placeholder="Last Name" [formControl]="incidentForm.controls['lastName']">
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput [(ngModel)]="registrationDetail.EmailID"  placeholder="Email ID" [formControl]="incidentForm.controls['emailId']">
+        </mat-form-field>
+        <mat-form-field>
+          <input type="tel" matInput [(ngModel)]="registrationDetail.MobileNum"  placeholder="Mobile No" [formControl]="incidentForm.controls['mobileNumber']">
+            <mat-icon matSuffix>phone</mat-icon>
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput [(ngModel)]="IncidentDetails.DepartmentName"  placeholder="Department" [formControl]="incidentForm.controls['department']">
+        </mat-form-field>
+        <mat-form-field>
+          <textarea [formControl]="incidentForm.controls['issueDescription']" [(ngModel)]="IncidentDetails.Description" matInput placeholder="Issue Description"></textarea>
+        </mat-form-field>
+        <mat-form-field>
+          <mat-select placeholder="Status" [(ngModel)]="IncidentDetails.Status" data-ng-selected="IncidentDetails.Status" [formControl]="incidentForm.controls['status']" required>
+            <mat-option *ngFor="let status of statusList" [value]="status">{{status}}</mat-option>
+          </mat-select>
+          <mat-error *ngIf="incidentForm.controls['status'].hasError('required')">You must select a Status.</mat-error>
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput [(ngModel)]="remarks" placeholder="Remarks" [formControl]="incidentForm.controls['remarks']" required>
+          <mat-error *ngIf="incidentForm.controls['remarks'].invalid">You must enter a remarks.</mat-error>
+        </mat-form-field>
+    </form>
+  </div>
+  <div class="mid-content">
+    <button mat-raised-button [disabled]="incidentForm.invalid" (click)="UpdateIncident()" color="primary">Update</button> 
+    <button mat-raised-button (click)="Cancel()" color="primary">Cancel</button> 
+  </div>
+</div>

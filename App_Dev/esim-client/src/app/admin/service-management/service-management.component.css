@@ -1,0 +1,35 @@
+.ticket-background{
+    /* width: 100%; */
+    background-color: white;
+    height: 100%;
+}
+
+.header-font {
+    font-size: 35px;
+    font-family: Helvetica, Arial, sans-serif;
+    margin:0;
+    line-height: 60px;
+    width: 100%;
+    text-align: center;
+}
+
+.mid-content{
+    text-align: center;
+    width: 100%;
+}
+
+.form-container{
+    width: 80%;
+    margin: auto;
+}
+
+.checkbox-section{
+    display:flex;
+    align-content:center;
+    align-items:center;
+    height:60px;
+} /* Added by Arun On 26Jan2018 */
+
+.checkbox-margin{
+    margin:0 10px;
+} /*Adde by Arun On26Jan2018*/

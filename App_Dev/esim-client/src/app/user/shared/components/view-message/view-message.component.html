@@ -1,0 +1,24 @@
+<h1 class="alert-message-header" [ngStyle.xs]="{'font-size.px': 15}">View Alert Messages</h1>
+<mat-form-field>
+  <input matInput placeholder="Filter" (keyup)="applyFilter($event.target.value)" >
+</mat-form-field>
+<mat-table #serviceTable [dataSource]="MessageDataSource">
+  <ng-container matColumnDef="messageNo">
+    <mat-header-cell *matHeaderCellDef>No</mat-header-cell>
+    <mat-cell *matCellDef="let service; let i = index;">{{i+1}}</mat-cell>
+  </ng-container>
+  <ng-container matColumnDef="subject">
+    <mat-header-cell *matHeaderCellDef>Subject</mat-header-cell>
+    <mat-cell *matCellDef="let service">{{service.Subject}}</mat-cell>
+  </ng-container>
+  <ng-container matColumnDef="message">
+    <mat-header-cell *matHeaderCellDef>Message</mat-header-cell>
+    <mat-cell *matCellDef="let service">{{service.Message}}</mat-cell>
+  </ng-container>
+  <mat-header-row *matHeaderRowDef="['messageNo','subject','message']"></mat-header-row>
+  <mat-row *matRowDef="let rowData;columns:['messageNo','subject','message']"></mat-row>
+</mat-table>
+<mat-paginator #paginator
+[pageSize]="10"
+[pageSizeOptions]="[5, 10, 20]">
+</mat-paginator>

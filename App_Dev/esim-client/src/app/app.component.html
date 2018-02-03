@@ -1,0 +1,12 @@
+<!--The content below is only a placeholder and can be replaced.-->
+<div class="app-div home-background" >
+  <div class="header-div" *ngIf="isLoggedIn">
+    <app-header></app-header>
+  </div>
+  <div class="router-bounds">
+      <router-outlet></router-outlet>
+  </div>
+  <div class="footer-div" *ngIf="false">
+    <app-footer></app-footer>
+  </div>
+</div>
